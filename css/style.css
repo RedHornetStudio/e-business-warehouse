@@ -1,0 +1,84 @@
+body {
+    margin: 0px;
+    background: rgb(170, 170, 170);
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+* {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+button {
+    background: #910505;
+    border: none;
+    padding: 8px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:active {
+    background: #5e0303;
+}
+
+main {
+    overflow: hidden;
+    margin: 0px;
+    background: rgb(170, 170, 170);
+}
+
+/* main navigation menu */
+.nav-header-main {
+    background: rgb(58, 58, 58);
+}
+
+.nav-header-main ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.nav-header-main li {
+    float: left;
+}
+
+.nav-header-main a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 20px 20px;
+}
+
+.nav-header-main a:hover {
+    background-color: black;
+}
+
+.nav-header-main button {
+    display: block;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+/* main section */
+
+.main-section table {
+    width: 100%;
+}
+
+.main-section td {
+    padding: 5px;
+}
+
+.main-section tr:nth-child(even) {
+    background-color: #eee;
+  }
+
+.main-section tr:nth-child(odd) {
+    background-color: #fff;
+}
