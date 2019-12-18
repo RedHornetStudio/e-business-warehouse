@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/main.js"></script>
-    <title>Add new product in Warehouse</title>
+    <title>Warehouse</title>
 </head>
 <body>
     <header>
@@ -20,7 +20,20 @@
         </nav>
     </header>
     <main>
-
+        <section class="add-product">
+            <h1>ADD NEW PRODUCT</h1>
+            <form>
+                <input type="text" id="title" placeholder="Title">
+                <div id="title-error"></div>
+                <input type="text" id="description" placeholder="Description">
+                <div id="description-error"></div>
+                <input type="text" id="price" placeholder="Price">
+                <div id="price-error"></div>
+                <input type="text" id="stock" placeholder="Stock">
+                <div id="stock-error"></div>
+                <button type="button" onclick="addProduct()">ADD</button>
+            </form>
+        </section>
     </main>
     <footer>
 

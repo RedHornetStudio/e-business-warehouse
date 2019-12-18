@@ -13,6 +13,10 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 button {
     background: #910505;
     border: none;
@@ -81,4 +85,41 @@ main {
 
 .main-section tr:nth-child(odd) {
     background-color: #fff;
+}
+
+/* add new product form */
+.add-product h1 {
+    text-align: center;
+}
+
+.add-product form {
+    width: 400px;
+    margin: auto;
+}
+
+.add-product input {
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    font-size: 20px;
+}
+
+.add-product div {
+    margin-bottom: 10px;
+    color: red;
+    font-size: 12px;
+    height: 15px;
+}
+
+.add-product button {
+    display: block;
+    margin: auto;
+    padding: 10px 50px;
+}
+
+/* footer */
+footer {
+    margin-top: 20px;
+    text-align: center;
 }
