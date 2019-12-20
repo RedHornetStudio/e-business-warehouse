@@ -32,8 +32,9 @@ button:active {
 
 main {
     overflow: hidden;
-    margin: 0px;
     background: rgb(170, 170, 170);
+    max-width: 1920px;
+    margin: auto;
 }
 
 /* main navigation menu */
