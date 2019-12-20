@@ -16,9 +16,9 @@ class Dbh {
 
         try {
             $dsn = "mysql:host=" . $this->hostname . ";dbname=" . $this->dbname;
-            $pdo = new PDO($dsn, $this->username, $this->password);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
+            $conn = new PDO($dsn, $this->username, $this->password);
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $conn;
         } catch (PDOException $e) {
             $this->connError = "Connection failed: " . $e;
             return null;

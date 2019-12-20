@@ -55,13 +55,13 @@ if(isset($_POST['title'])) {
         echo $errorsJSON;
     } else {
         $dbh = new Dbh;
-        $pdo = $dbh->connect();
+        $conn = $dbh->connect();
         $errors['connection'] = $dbh->connError;
 
-        if($pdo && !$isError) {
+        if($conn && !$isError) {
             try {
                 $sql = 'INSERT INTO products (title, descrip, price, stock) VALUES (:title, :descrip, :price, :stock)';
-                $stmt = $pdo->prepare($sql);
+                $stmt = $conn->prepare($sql);
                 $stmt->execute(['title' => $title, 'descrip' => $description, 'price' => $price, 'stock' => $stock]);
             } catch (PDOException $e) {
                 $errors['query'] = 'Query error: ' . $e;

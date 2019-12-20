@@ -70,7 +70,6 @@ main {
 }
 
 /* main section */
-
 .main-section table {
     width: 100%;
 }
@@ -116,6 +115,11 @@ main {
     display: block;
     margin: auto;
     padding: 10px 50px;
+}
+
+/* about page */
+.about-section h1 {
+    text-align: center;
 }
 
 /* footer */
