@@ -1,20 +1,20 @@
 <?php
 
-
 if(isset($_POST['get'])) {
 
     require('dbh.inc.php');
 
     $products = [];
-    $errors = ['connectionError' => '', 'queryError' => ''];
+    $errors = ['connectionError' => '', 'queryError' => '', 'requestError' => ''];
 
     $dbh = new Dbh;
     $conn = $dbh->connect();
-    $errors['connectionError'] = $dbh->connError;
+    $errors['connectionError'] = $dbh->connError;   
+     
+    $get = $_POST['get'];
+    if($get == 'all') {
 
-    if($conn) {
-        $get = $_POST['get'];
-        if($get == 'all') {
+        if($conn) {
             try {
                 $sql = 'SELECT * FROM products ORDER BY id DESC';
                 $stmt = $conn->prepare($sql);
@@ -24,6 +24,22 @@ if(isset($_POST['get'])) {
                 $errors['queryError'] = 'Query error: ' . $e;
             }
         }
+
+    } else if(preg_match("/^[0-9]+$/", $get)) {
+
+        if($conn) {
+            try {
+                $sql = 'SELECT * FROM products WHERE id = :id';
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(['id' => $_POST['get']]);
+                $products['products'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                $errors['queryError'] = 'Query error: ' . $e;
+            }
+        }
+
+    } else {
+        $errors['queryError'] = 'Wrong request';
     }
 
     $errorsWithProducts = $errors + $products;

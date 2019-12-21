@@ -1,3 +1,13 @@
+<?php
+
+$id = '';
+if(isset($_POST['id'])) {
+
+    $id = $_POST['id'];
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +18,7 @@
     <script src="js/main.js"></script>
     <title>Warehouse</title>
 </head>
-<body>
+<body onload="getOneProduct('<?php echo htmlspecialchars($id); ?>')">
     <header>
         <nav class="nav-header-main clearfix">         
             <ul>
@@ -31,7 +41,7 @@
                 <div id="price-error"></div>
                 <input type="text" id="stock" placeholder="Stock">
                 <div id="stock-error"></div>
-                <button type="button" onclick="updateProduct()">UPDATE</button>
+                <button type="button" onclick="updateProduct('<?php echo htmlspecialchars($id); ?>')">UPDATE</button>
             </form>
         </section>
     </main>

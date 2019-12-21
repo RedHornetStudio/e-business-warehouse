@@ -30,7 +30,8 @@ function addProduct() {
     };
     xhttp.open("POST", "includes/add.inc.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send('title=' + title.value + '&description=' + description.value + '&price=' + price.value + '&stock=' + stock.value);
+    xhttp.send('title=' + encodeURIComponent(title.value) + '&description=' + encodeURIComponent(description.value) +
+        '&price=' + encodeURIComponent(price.value) + '&stock=' + encodeURIComponent(stock.value));
 }
 
 function addProductsInTable() {
@@ -44,6 +45,7 @@ function addProductsInTable() {
                 var productsTable = document.getElementById('products-table')
                 result.products.forEach(function(value) {
                     var tr = document.createElement('tr');
+                    tr.id = value.id;
 
                     var id = document.createElement('td');
                     id.innerText = value.id;
@@ -67,15 +69,17 @@ function addProductsInTable() {
 
                     var delTd = document.createElement('td');
                     var deleteButton = document.createElement('button');
-                    deleteButton.id = value.id;
+                    deleteButton.addEventListener("click", function() {
+                        deleteProduct(value.id);
+                    });
                     deleteButton.innerText = 'DELETE';
 
                     var updateButton = document.createElement('button');
-                    updateButton.id = value.id;
                     updateButton.innerText = 'UPDATE';
                     updateButton.style.marginRight = '10px';
                     updateButton.addEventListener("click", function() {
-                        location.href = 'update.html';
+                        document.getElementById('input_update_row').value = value.id;
+                        document.getElementById('form_update_row').submit();
                     });
 
                     delTd.style.backgroundColor = 'rgb(170, 170, 170)';
@@ -94,7 +98,7 @@ function addProductsInTable() {
     xhttp.send('get=all');
 }
 
-function updateProduct() {
+function updateProduct(id) {
     var title = document.getElementById('title');
     var description = document.getElementById('description');
     var price = document.getElementById('price');
@@ -120,7 +124,55 @@ function updateProduct() {
             }
         }
     };
-    xhttp.open("POST", "includes/add.inc.php", true);
+    xhttp.open("POST", "includes/update.inc.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send('title=' + title.value + '&description=' + description.value + '&price=' + price.value + '&stock=' + stock.value);
+    xhttp.send('title=' + encodeURIComponent(title.value) + '&description=' + encodeURIComponent(description.value) +
+        '&price=' + encodeURIComponent(price.value) + '&stock=' + encodeURIComponent(stock.value) + '&id=' + encodeURIComponent(id));
+}
+
+function getOneProduct(id) {
+
+    if(id != '') {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = JSON.parse(this.responseText);
+                if(result.connectionError != '' || result.queryError != '' || result.requestError != '') {
+                    alert(result.connectionError + result.queryError + result.requestError);
+                } else {
+                    if(result.products.length != 0) {
+                        var title = document.getElementById('title');
+                        title.value = result.products[0].title;
+                        var description = document.getElementById('description');
+                        description.value = result.products[0].descrip;
+                        var price = document.getElementById('price');
+                        price.value = result.products[0].price;
+                        var stock = document.getElementById('stock');
+                        stock.value = result.products[0].stock;
+                    }
+                }
+            }
+        };
+        xhttp.open("POST", "includes/get.inc.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send('get=' + encodeURIComponent(id));
+    }
+}
+
+function deleteProduct(id) {
+    var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var result = JSON.parse(this.responseText);
+                if(result.connectionError != '' || result.queryError != '' || result.requestError != '') {
+                    alert(result.connectionError + result.queryError + result.requestError);
+                } else {
+                    var element = document.getElementById(id);
+                    element.parentNode.removeChild(element);
+                }
+            }
+        };
+        xhttp.open("POST", "includes/delete.inc.php", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send('delete=' + encodeURIComponent(id));
 }

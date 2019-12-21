@@ -1,8 +1,9 @@
 <?php
 
-require('dbh.inc.php');
-
 if(isset($_POST['title'])) {
+
+    require('dbh.inc.php');
+
     $title = $_POST['title'];
     $description = $_POST['description'];
     $price = $_POST['price'];
