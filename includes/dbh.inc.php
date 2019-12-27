@@ -9,9 +9,9 @@ class Dbh {
 
     function connect() {
         $this->hostname = "localhost";
-        $this->username = "root";
-        $this->password = "";
-        $this->dbname = "ebusiness_warehouse";
+        $this->username = "id11739129_user";
+        $this->password = "warehouse";
+        $this->dbname = "id11739129_warehouse";
         $this->connError = "";
 
         try {

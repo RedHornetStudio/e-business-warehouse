@@ -60,7 +60,7 @@ function addProductsInTable() {
                     tr.appendChild(description);
 
                     var price = document.createElement('td');
-                    price.innerText = value.price;
+                    price.innerText = '€' + value.price;
                     tr.appendChild(price);
 
                     var stock = document.createElement('td');
