@@ -21,6 +21,11 @@ if(isset($_POST['get'])) {
                 $stmt = $conn->prepare($sql);
                 $stmt->execute();
                 $products['products'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                // $i = 0;
+                // while($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                //     $products['products'][$i] = $result;
+                //     $i++;
+                // }
             } catch (PDOException $e) {
                 $errors['queryError'] = 'Query error: ' . $e;
             }
